@@ -1,11 +1,32 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import axios from 'axios';
 
 const Landing = (props) => {
    
     const [messages, setMessages] = useState([{text: "Everyone come to the hall", time: Date.now()},{text:"Conference at 11", time: Date.now()},{text: "Everyone come to the hall", time: Date.now()}])
     
+    useEffect(() => {
+        axios.get('https://choolakejinendra.firebaseio.com/posts.json')
+        .then(response => {
+            // setMessages(response.data)
+            const messagesfromuri = []
+            const obj = response.data
+            
+            for(let key in obj) {
+                messagesfromuri.push({
+                    id: key,
+                    text: obj[key].text,
+                    time: obj[key].time
+                })
+            }
+            setMessages(messagesfromuri)
+        }).catch(er => {
+            console.log(er)
+        })
+        
+    },[messages])
         return(
             <View>
                 <TouchableOpacity onPress={() => {props.navigation.navigate('Form')}}>
