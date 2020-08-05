@@ -6,12 +6,14 @@ import axios from 'axios';
 const Landing = (props) => {
    
     const [messages, setMessages] = useState([{text: "Everyone come to the hall", time: Date.now()},{text:"Conference at 11", time: Date.now()},{text: "Everyone come to the hall", time: Date.now()}])
-    
+    const [premessages, setPremessages] = useState();
+
     useEffect(() => {
         axios.get('https://choolakejinendra.firebaseio.com/posts.json')
         .then(response => {
             // setMessages(response.data)
             const messagesfromuri = []
+            var premessagesfromuri = []
             const obj = response.data
             
             for(let key in obj) {
@@ -21,11 +23,13 @@ const Landing = (props) => {
                     time: obj[key].time
                 })
             }
-            setMessages(messagesfromuri)
+            premessagesfromuri = messagesfromuri.reverse()
+            setMessages(premessagesfromuri)
+            
         }).catch(er => {
             console.log(er)
         })
-        
+        // setMessages(premessagesfromuri)
     },[messages])
         return(
             <View>
@@ -34,8 +38,10 @@ const Landing = (props) => {
                     <Text style={styles.plus}>Create a Post</Text>
                 </View>
                 </TouchableOpacity>
-                <View style={{marginTop: 20}}>
+                <View style={{marginBottom: 100}}>
+                
                 <ScrollView>
+                    
                 {messages.map(message => {
                     return <View style={styles.tile}>
                         <Text style={styles.message}>{message.text}</Text>
@@ -49,7 +55,9 @@ const Landing = (props) => {
                             </TouchableOpacity>
                         </View></View>
                 })}
+                
                 </ScrollView>
+               
                 </View>
                 
             </View>
