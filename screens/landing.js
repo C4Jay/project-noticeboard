@@ -1,33 +1,84 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
-class Landing extends Component {
-    state = {
-        messages: [{text: "Everyone come to the hall", time: Date.now()},{text:"Conference at 11", time: Date.now()}]
-    }
-    render () {
+const Landing = (props) => {
+   
+    const [messages, setMessages] = useState([{text: "Everyone come to the hall", time: Date.now()},{text:"Conference at 11", time: Date.now()},{text: "Everyone come to the hall", time: Date.now()}])
+    
         return(
             <View>
-                {this.state.messages.map(message => {
-                    <View style={styles.tile}><Text style={styles.message}>{message.text}</Text></View>
+                <TouchableOpacity onPress={() => {props.navigation.navigate('Form')}}>
+                <View style={styles.btn}>
+                    <Text style={styles.plus}>Create a Post</Text>
+                </View>
+                </TouchableOpacity>
+                <View style={{marginTop: 20}}>
+                <ScrollView>
+                {messages.map(message => {
+                    return <View style={styles.tile}>
+                        <Text style={styles.message}>{message.text}</Text>
+                        <Text>{message.time}</Text>
+                    <View style={{flexDirection: 'row', width: '100%'}}>
+                        <TouchableOpacity>
+                            <View><Text style={styles.cancel}>Remove</Text></View>
+                            </TouchableOpacity>
+                            <TouchableOpacity>
+                            <View><Text style={styles.patch}>Update</Text></View>
+                            </TouchableOpacity>
+                        </View></View>
                 })}
+                </ScrollView>
+                </View>
+                
             </View>
         )
-    }
-}
+            }
 
 const styles = StyleSheet.create({
     tile: {
-        backgroundColor: '#eb7b0c',
+        backgroundColor: '#d48e59',
         borderRadius: 10,
-        padding: 4
+        padding: 8,
+        margin: 5
     },
 
     message: {
-        lineHeight: 4,
-        color: '#8c9096',
-        fontWeight: 'bold'
+        lineHeight: 50,
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 30
+        
+    },
+
+    btn : {
+        borderRadius: 20,
+        backgroundColor: '#b4f0f0',
+        position: 'relative',
+        marginTop: 10
+        
+    },
+
+    plus: {
+        fontSize: 28,
+        textAlign: 'center'
+    },
+
+    cancel: {
+        color: '#ed0909',
+        marginTop: 16,
+        
+        fontSize: 20
+    },
+
+    patch: {
+        color: '#2a8ed1',
+        marginTop: 16,
+      
+        fontSize: 20
     }
+
+
 })
 
 export default Landing;

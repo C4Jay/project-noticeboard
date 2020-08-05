@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import navs from './navs/navs';
 import Landing from './screens/landing';
+import Form from './screens/form';
 
 
 const HomeStack = createStackNavigator();
@@ -22,7 +23,7 @@ export default function App() {
       },
     }}>
       <HomeStack.Screen name="Landing" component={Landing} />
-      
+      <HomeStack.Screen name="Form" component={Form} />
     </HomeStack.Navigator>
 
   </NavigationContainer>
