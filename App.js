@@ -6,6 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import navs from './navs/navs';
 import Landing from './screens/landing';
 import Form from './screens/form';
+import SigninScreen from './screens/login';
+import RegisterScreen from './screens/register';
 
 
 const HomeStack = createStackNavigator();
@@ -22,6 +24,8 @@ export default function App() {
         fontWeight: 'bold',
       },
     }}>
+      <HomeStack.Screen name="SignIn" component={SigninScreen} />
+      <HomeStack.Screen name="SignUp" component={RegisterScreen} />
       <HomeStack.Screen name="Landing" component={Landing} />
       <HomeStack.Screen name="Form" component={Form} />
     </HomeStack.Navigator>
