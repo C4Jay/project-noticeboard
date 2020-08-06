@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import axios from 'axios';
@@ -9,12 +9,19 @@ const Form = (props) => {
     const [text, setText] = useState('');
 
     const post = () => {
+        if(props.route.params.key) {
+            axios.put('https://choolakejinendra.firebaseio.com/posts/' + props.route.params.key + '.json',{
+                text: text,
+                time: moment().format('MMMM Do YYYY, h:mm:ss a')
+            })
+        }
         axios.post('https://choolakejinendra.firebaseio.com/posts.json',{
             text: text,
             time: moment().format('MMMM Do YYYY, h:mm:ss a')
         })
     }
 
+    
         return (
             <View>
             <TextInput

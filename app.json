@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "noticeboard1",
-    "slug": "noticeboard1",
+    "name": "17001757-C.J.Suwandarathna",
+    "slug": "17001757CJSuwandarathna",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,6 +21,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "com.projectnoticeboard.projectnoticeboard",
+      "versionCode": 1 
     }
   }
 }

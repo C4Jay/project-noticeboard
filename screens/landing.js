@@ -100,7 +100,7 @@ const Landing = (props) => {
                 <ScrollView>
                     
                 {messages.map(message => {
-                    return <View style={styles.tile}>
+                    return <View key={message.id} style={styles.tile}>
                         <Text style={styles.message}>{message.text}</Text>
                         <Text>{message.time}</Text>
                     {highpriv ? 
@@ -108,9 +108,9 @@ const Landing = (props) => {
                         <TouchableOpacity onPress={() => removepost(message.id)}>
                             <View><Text style={styles.cancel}>Remove</Text></View>
                             </TouchableOpacity>
-                            {/* <TouchableOpacity>
+                            <TouchableOpacity onPress={() => {props.navigation.navigate('Form', {key: message.id})}}>
                             <View><Text style={styles.patch}>Update</Text></View>
-                            </TouchableOpacity> */}
+                            </TouchableOpacity>
                         </View>
                         : null }
                         </View>
