@@ -13,7 +13,7 @@ function navs() {
       headerMode="screen"
       screenOptions={{
         headerTintColor: 'white',
-        headerStyle: { backgroundColor: 'tomato' },
+        headerStyle: { backgroundColor: 'yellow' },
       }}
     >
       

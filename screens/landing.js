@@ -89,7 +89,7 @@ const Landing = (props) => {
      </View>  : null }
                 
                 {highpriv ? 
-                <TouchableOpacity onPress={() => {props.navigation.navigate('Form')}}>
+                <TouchableOpacity onPress={() => {props.navigation.navigate('Form', {key: 'foo'})}}>
                 
                 <View style={styles.btn}>
                     <Text style={styles.plus}>Create a Post</Text>
@@ -102,7 +102,7 @@ const Landing = (props) => {
                 {messages.map(message => {
                     return <View key={message.id} style={styles.tile}>
                         <Text style={styles.message}>{message.text}</Text>
-                        <Text>{message.time}</Text>
+                        <Text style={{fontWeight: 'bold', fontSize: 16}}>{message.time}</Text>
                     {highpriv ? 
                     <View style={{flexDirection: 'row', width: '100%'}}>
                         <TouchableOpacity onPress={() => removepost(message.id)}>

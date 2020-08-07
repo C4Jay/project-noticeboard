@@ -7,21 +7,33 @@ import moment from 'moment';
 const Form = (props) => {
     
     const [text, setText] = useState('');
+    const [key, setKey] = useState();
+
+    useEffect(() => {
+       
+        if(props.route.params.key != 'foo') {
+            setKey(props.route.params.key)
+        }
+    })
 
     const post = () => {
-        if(props.route.params.key) {
-            axios.put('https://choolakejinendra.firebaseio.com/posts/' + props.route.params.key + '.json',{
-                text: text,
-                time: moment().format('MMMM Do YYYY, h:mm:ss a')
-            })
-        }
-        axios.post('https://choolakejinendra.firebaseio.com/posts.json',{
+       
+            axios.post('https://choolakejinendra.firebaseio.com/posts.json',{
             text: text,
             time: moment().format('MMMM Do YYYY, h:mm:ss a')
         })
+        props.navigation.navigate('Landing')
+
     }
 
-    
+    const postwkey = (key) => {
+        axios.put('https://choolakejinendra.firebaseio.com/posts/' + key + '.json',{
+                text: text,
+                time: moment().format('MMMM Do YYYY, h:mm:ss a')
+            })
+            props.navigation.navigate('Landing')
+    }
+
         return (
             <View>
             <TextInput
@@ -34,9 +46,15 @@ const Form = (props) => {
     />
 
     <View style={{width: 100, left: '38%', marginTop: 40}}>
-    <Button onPress={() => {post()}} mode="contained" color="#8b32a8"> 
+    {/* <Button onPress={() => {post()}} mode="contained" color="#8b32a8"> 
         post
-    </Button>
+    </Button> */}
+
+    {key ? <Button onPress={() => {postwkey(key)}} mode="contained" color="#8b32a8"> 
+        post
+    </Button> : <Button onPress={() => {post()}} mode="contained" color="#8b32a8"> 
+        post
+    </Button> }
    
 
     </View>
